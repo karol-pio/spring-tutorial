@@ -3,8 +3,9 @@ package com.acme.order.delivery;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class TimeService {
 
 	public Date now() {
