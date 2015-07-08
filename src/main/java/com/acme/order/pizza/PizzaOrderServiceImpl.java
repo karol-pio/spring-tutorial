@@ -3,36 +3,37 @@ package com.acme.order.pizza;
 import java.util.Date;
 import java.util.List;
 
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.acme.order.Customer;
-import com.acme.order.HashMapOrderRepository;
 import com.acme.order.OrderFactory;
 import com.acme.order.OrderRepository;
 import com.acme.order.OrderStatus;
-import com.acme.order.delivery.BasicDeliveryTimeServiceImpl;
 import com.acme.order.delivery.DeliveryTimeService;
-import com.acme.order.delivery.TimeService;
 import com.acme.order.notification.DeliveryTemplate;
 import com.acme.order.notification.MailSender;
 import com.acme.order.notification.MessageTemplateService;
 import com.acme.order.notification.OrderCancelledTemplate;
-import com.acme.order.notification.SimpleMessageTemplateService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class PizzaOrderServiceImpl implements PizzaOrderService {
 
-	private final MailSender mailSender;
+	@Autowired
+	private  MailSender mailSender;
+	@Autowired
+	private  OrderRepository orderRepository;
+	@Autowired
+	private  OrderFactory orderFactory;
+	@Autowired
+	private  DeliveryTimeService deliveryTimeService;
+	@Autowired
+	private  MessageTemplateService messageTemplate;
 
-	private final OrderRepository orderRepository;
-
-	private final OrderFactory orderFactory;
-
-	private final DeliveryTimeService deliveryTimeService;
-
-	private final MessageTemplateService messageTemplate;
-
-
+	
 	public PizzaOrderServiceImpl(MailSender mailSender, OrderRepository orderRepository, OrderFactory orderFactory,
 			DeliveryTimeService deliveryTimeService, MessageTemplateService messageTemplate) {
 		this.orderFactory = orderFactory;
@@ -41,6 +42,13 @@ public class PizzaOrderServiceImpl implements PizzaOrderService {
 		this.messageTemplate = messageTemplate;
 		this.mailSender = mailSender;
 	}
+
+
+	public PizzaOrderServiceImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	@Override
 	public String createOrder(Customer customer, PizzaType type) {
