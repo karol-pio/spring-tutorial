@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- services -->
+
+<!--     <bean id="petStore" class="org.springframework.samples.jpetstore.services.PetStoreServiceImpl"> -->
+<!--         <property name="accountDao" ref="accountDao"/> -->
+<!--         <property name="itemDao" ref="itemDao"/> -->
+<!--         additional collaborators and configuration for this bean go here -->
+<!--     </bean> -->
+
+    <!-- more bean definitions for services go here -->
+	
+	<bean id="pizzaServiceImpl" class="com.acme.order.pizza.PizzaOrderServiceImpl">
+		<constructor-arg name="orderFactory" ref="orderFactory" />
+		<constructor-arg name="hashMapOrderRepository" ref="hashMapOrderRepository"/>
+		<constructor-arg name="simpleMessageTemplateService" ref="simpleMessageTemplateService"  />
+		<constructor-arg name="mailSender" ref="mailSender"/>
+	</bean>
+	
+	<bean name="orderFactory" class="com.acme.order.OrderFactory"/>
+	<bean name="mailSender" class="com.acme.order.notification.MailSender" />
+	<bean name="hashMapOrderRepository" class="com.acme.order.HashMapOrderRepository" />
+	<bean name="simpleMessageTemplateService" class="com.acme.order.notification.SimpleMessageTemplateService" />
+	
+	<bean  >
+	<property name=""></property>
+	
+	
+	</bean>
+</beans>
